@@ -1,7 +1,7 @@
-package io.github.maylcf.moviesflix
+package io.github.maylcf.moviesflix.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import io.github.maylcf.moviesflix.databinding.ActivityMainBinding
 import io.github.maylcf.moviesflix.model.Movie
 

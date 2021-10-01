@@ -1,4 +1,4 @@
-package io.github.maylcf.moviesflix
+package io.github.maylcf.moviesflix.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import io.github.maylcf.moviesflix.R
 import io.github.maylcf.moviesflix.model.Movie
 
 class MoviesAdapter(private val moviesList: List<Movie>): RecyclerView.Adapter<MoviesViewHolder>() {
