@@ -1,16 +1,21 @@
 package io.github.maylcf.moviesflix.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.github.maylcf.moviesflix.api.MovieRestApiTask
 import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.repository.MovieRepository
 
-class MovieListViewModel: ViewModel() {
+class MovieListViewModel : ViewModel() {
 
-    private val listOfMovies = arrayListOf<Movie>(
-        Movie(0, "Titanic", null, null, null),
-        Movie(1, "Up", null, null, null),
-    )
+    private val movieRestApiTask = MovieRestApiTask()
+    private val movieRepository = MovieRepository(movieRestApiTask)
+
+    companion object {
+        const val tag = "MovieListViewModel"
+    }
 
     private var _moviesList = MutableLiveData<List<Movie>>()
 
@@ -22,6 +27,13 @@ class MovieListViewModel: ViewModel() {
     }
 
     private fun getAllMovies() {
-        _moviesList.value = listOfMovies
+        // Suggestion: Use Coroutines or RxJava
+        Thread {
+            try {
+                _moviesList.postValue(movieRepository.getAllMovies())
+            } catch (exception: Exception) {
+                Log.d(tag, exception.message.toString())
+            }
+        }.start()
     }
 }
