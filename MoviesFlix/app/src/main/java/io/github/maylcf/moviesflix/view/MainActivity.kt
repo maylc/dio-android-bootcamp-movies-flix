@@ -2,17 +2,15 @@ package io.github.maylcf.moviesflix.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import io.github.maylcf.moviesflix.databinding.ActivityMainBinding
 import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.viewmodel.MovieListViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private val listOfMovies = arrayListOf<Movie>(
-        Movie(0, "Titanic", null, null, null),
-        Movie(1, "Up", null, null, null),
-    )
+    private lateinit var movieListViewModel: MovieListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +18,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        populateList()
+        movieListViewModel =
+            ViewModelProvider.NewInstanceFactory().create(MovieListViewModel::class.java)
+        movieListViewModel.ini()
+
+        initObserver()
     }
 
-    private fun populateList() {
+    private fun initObserver() {
+        movieListViewModel.moviesList.observe(this, { list ->
+            populateList(list)
+        })
+    }
+
+    private fun populateList(list: List<Movie>) {
         binding.moviesList.apply {
             hasFixedSize()
-            adapter = MoviesAdapter(listOfMovies)
+            adapter = MoviesAdapter(list)
         }
     }
 }
