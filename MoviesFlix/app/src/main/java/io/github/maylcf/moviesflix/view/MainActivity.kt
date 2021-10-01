@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import io.github.maylcf.moviesflix.databinding.ActivityMainBinding
-import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.domain.Movie
 import io.github.maylcf.moviesflix.viewmodel.MovieListViewModel
 
 class MainActivity : AppCompatActivity() {

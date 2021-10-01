@@ -5,13 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.maylcf.moviesflix.api.MovieRestApiTask
-import io.github.maylcf.moviesflix.model.Movie
-import io.github.maylcf.moviesflix.repository.MovieRepository
+import io.github.maylcf.moviesflix.data.MovieRepository
+import io.github.maylcf.moviesflix.domain.Movie
+import io.github.maylcf.moviesflix.implementation.MovieDataSourceImplementation
+import io.github.maylcf.moviesflix.usecase.MovieListUseCase
 
 class MovieListViewModel : ViewModel() {
 
     private val movieRestApiTask = MovieRestApiTask()
-    private val movieRepository = MovieRepository(movieRestApiTask)
+    private val movieDataSource = MovieDataSourceImplementation(movieRestApiTask)
+    private val movieRepository = MovieRepository(movieDataSource)
+    private val movieListUseCase = MovieListUseCase(movieRepository)
 
     companion object {
         const val tag = "MovieListViewModel"
@@ -30,7 +34,7 @@ class MovieListViewModel : ViewModel() {
         // Suggestion: Use Coroutines or RxJava
         Thread {
             try {
-                _moviesList.postValue(movieRepository.getAllMovies())
+                _moviesList.postValue(movieListUseCase.invoke())
             } catch (exception: Exception) {
                 Log.d(tag, exception.message.toString())
             }

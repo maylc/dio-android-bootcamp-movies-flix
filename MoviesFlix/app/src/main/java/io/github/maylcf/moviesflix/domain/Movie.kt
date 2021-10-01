@@ -1,4 +1,4 @@
-package io.github.maylcf.moviesflix.model
+package io.github.maylcf.moviesflix.domain
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

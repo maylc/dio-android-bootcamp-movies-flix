@@ -1,6 +1,6 @@
 package io.github.maylcf.moviesflix.api
 
-import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.domain.Movie
 import retrofit2.Call
 import retrofit2.http.GET
 

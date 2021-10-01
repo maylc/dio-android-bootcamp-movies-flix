@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import io.github.maylcf.moviesflix.R
-import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.domain.Movie
 
 class MoviesAdapter(private val moviesList: List<Movie>): RecyclerView.Adapter<MoviesViewHolder>() {
 

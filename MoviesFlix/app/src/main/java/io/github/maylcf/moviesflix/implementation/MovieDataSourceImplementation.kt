@@ -1,10 +1,12 @@
-package io.github.maylcf.moviesflix.repository
+package io.github.maylcf.moviesflix.implementation
 
 import android.util.Log
 import io.github.maylcf.moviesflix.api.MovieRestApiTask
-import io.github.maylcf.moviesflix.model.Movie
+import io.github.maylcf.moviesflix.data.MovieDataSource
+import io.github.maylcf.moviesflix.domain.Movie
 
-class MovieRepository(private val movieRestApiTask: MovieRestApiTask) {
+class MovieDataSourceImplementation(private val movieRestApiTask: MovieRestApiTask) :
+    MovieDataSource {
 
     companion object {
         const val tag = "MovieRepository"
@@ -12,7 +14,7 @@ class MovieRepository(private val movieRestApiTask: MovieRestApiTask) {
 
     private val movieList = arrayListOf<Movie>()
 
-    fun getAllMovies(): List<Movie> {
+    override fun getAllMovies(): List<Movie> {
         val request = movieRestApiTask.retrofitApi().getAllMovies().execute()
 
         if (request.isSuccessful) {
